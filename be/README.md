@@ -42,7 +42,7 @@ To get the server running locally:
 
 # Data Model
 
-![DataModel]((https://i.imgur.com/nlR2wXI.png))
+[![DataModel]((https://i.imgur.com/nlR2wXI.png))](https://i.imgur.com/nlR2wXI.png)
 
 
 #### USERS
