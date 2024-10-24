@@ -1,9 +1,15 @@
-import './App.css';
+import { Link, Route, Routes } from "react-router-dom";
+import Home from "./Home";
+import React from "react";
+import Login from "./Login";
+import Register from "./Register";
 
-function App() {
+export default function App() {
   return (
-    <h1>Hello World</h1>
+    <Routes>
+      <Route exact path="/" element={<Home />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+    </Routes>
   );
 }
-
-export default App;
