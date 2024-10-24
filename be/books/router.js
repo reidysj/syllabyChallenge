@@ -4,6 +4,7 @@ const booksDb = require('./model.js')
 const uuid = require('uuid')
 const sectionsDb = require('../sections/model.js')
 
+//create a book
 router.post('/', (req, res) => {
     booksDb.add({author_id: req.body.user_id, title: req.body.title, book_id: uuid.v4()})
     .then(book => {

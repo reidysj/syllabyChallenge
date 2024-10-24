@@ -11,7 +11,8 @@ router.post('/register', verifyUser, verifyUnique, (req, res) => {
     newUser.user_id = uuid.v4()
     Users.add(newUser)
     .then(user => {
-        res.status(201).json({username: user.username, user_id: user.user_id})
+        const token = generateToken(user, false)
+        res.status(201).json({username: user.username, user_id: user.user_id, token})
     })
     .catch(err => {
         res.status(500).json({error: err.message})
