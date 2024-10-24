@@ -2,14 +2,16 @@ const router = require('express').Router()
 const bcrypt = require('bcryptjs')
 const generateToken = require('../utils/generateToken')
 const Users = require('../users/model.js')
+const uuid = require('uuid')
 
 router.post('/register', verifyUser, verifyUnique, (req, res) => {
     const newUser = req.body;
     const hash = bcrypt.hashSync(newUser.password, 12);
     newUser.password = hash;
+    newUser.user_id = uuid.v4()
     Users.add(newUser)
     .then(user => {
-        res.status(201).json(user)
+        res.status(201).json({username: user.username, user_id: user.user_id})
     })
     .catch(err => {
         res.status(500).json({error: err.message})
@@ -23,7 +25,8 @@ router.post('/login', verifyUser, (req, res) => {
         console.log(user)
         if(user && bcrypt.compareSync(password, user.password)){
             const token = generateToken(user, rememberMe)
-            res.status(200).json({user, token})
+            const response = {user: user.username, user_id: user.user_id, token}
+            res.status(200).json(response)
         } else {
             res.status(401).json({message: 'Authentication failed'})
         }

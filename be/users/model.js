@@ -10,7 +10,7 @@ function add(user) {
     .returning('id')
     .insert(user)
     .then(([id]) => {
-        return getBy({id})
+        return getBy(id)
     })
 }
 
